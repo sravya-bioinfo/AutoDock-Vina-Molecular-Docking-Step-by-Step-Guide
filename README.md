@@ -12,6 +12,7 @@ Better accuracy on average
 Software Required:-
 SoftwarePurposeDownloadAutoDock VinaDocking enginevina.scripps.eduAutoDockTools (ADT)Receptor & ligand preparationMGLToolsPyMOLVisualizationpymol.orgOpen BabelFile format conversionopenbabel.org
 
+
 Workflow Overview:-
 Protein (PDB) --> Remove Water & Heteroatoms --> Add Hydrogens & Charges --> receptor.pdbqt
 Ligand (SDF/MOL2) --> Add Hydrogens & Torsions --> ligand.pdbqt
@@ -26,17 +27,17 @@ Ligand (SDF/MOL2) --> Add Hydrogens & Torsions --> ligand.pdbqt
          |
     Visualize in PyMOL
 
-Step 1 — Download the Protein Structure
+
+Step 1 — Download the Protein Structure:-
 
 Go to RCSB Protein Data Bank
 Search your target protein (e.g., AKT1, 1IEP, 6LU7)
 Download the .pdb file
 
-
 Tip: Note the active site residues from the literature before starting — you'll need them to center the grid box.
 
 
-Step 2 — Prepare the Receptor
+Step 2 — Prepare the Receptor:-
 Open AutoDockTools (ADT):
 Steps in ADT:
 
@@ -51,7 +52,7 @@ Grid > Macromolecule > Save → saves as receptor.pdbqt
 Alternatively, use command line with MGLTools Python scripts:
 bashpythonsh prepare_receptor4.py -r protein.pdb -o receptor.pdbqt -A hydrogens
 
-Step 3 — Prepare the Ligand
+Step 3 — Prepare the Ligand:-
 Get your ligand:
 
 Download from PubChem in SDF format
@@ -68,7 +69,7 @@ Ligand > Output > Save as PDBQT
 Or via command line:
 bashpythonsh prepare_ligand4.py -l ligand.pdb -o ligand.pdbqt
 
-Step 4 — Define the Grid Box
+Step 4 — Define the Grid Box:-
 Unlike AutoDock 4, Vina does not need AutoGrid. You just define the box center and size directly in the config file.
 In ADT:
 
@@ -85,7 +86,7 @@ Size: size_x, size_y, size_z (in Angstroms, typically 20–30 Å)
 Tip: Use PyMOL to identify and measure the active site dimensions for accurate box sizing.
 
 
-Step 5 — Create the Configuration File
+Step 5 — Create the Configuration File:-
 Create a plain text file named config.txt:
 receptor = receptor.pdbqt
 ligand = ligand.pdbqt
@@ -107,7 +108,7 @@ log = log.txt
 Parameter explanation:
 ParameterDescriptionexhaustivenessSearch thoroughness (8 = default, increase for better results)num_modesNumber of binding poses to generateenergy_rangeMax energy difference from best pose (kcal/mol)
 
-Step 6 — Run AutoDock Vina
+Step 6 — Run AutoDock Vina:-
 Open terminal/command prompt in the folder containing all files:
 bashvina --config config.txt
 Or specify directly without config file:
@@ -129,8 +130,10 @@ mode | affinity   | dist from best mode
    1 |      -8.5  |    0.000 |    0.000
    2 |      -8.1  |    1.823 |    2.451
    3 |      -7.9  |    2.134 |    3.012
+
+   
 Best pose = Mode 1 (lowest binding affinity)
-Key values:
+Key values:-
 ParameterMeaningAffinity (kcal/mol)Lower (more negative) = stronger bindingRMSD l.b.Lower bound RMSD from best modeRMSD u.b.Upper bound RMSD from best mode
 
 Step 8 — Extract Best Pose:-
