@@ -1,6 +1,7 @@
 What is AutoDock Vina?
+
 AutoDock Vina is an improved docking engine over AutoDock 4. It is faster, more accurate, and easier to use — no need to calculate grid maps separately. It uses a scoring function based on hydrophobic interactions and hydrogen bonding.
-Key advantages over AutoDock 4:
+Key advantages over AutoDock 4:-
 
 Up to 100x faster
 No AutoGrid step needed
@@ -8,10 +9,10 @@ Simpler configuration file
 Better accuracy on average
 
 
-Software Required
+Software Required:-
 SoftwarePurposeDownloadAutoDock VinaDocking enginevina.scripps.eduAutoDockTools (ADT)Receptor & ligand preparationMGLToolsPyMOLVisualizationpymol.orgOpen BabelFile format conversionopenbabel.org
 
-Workflow Overview
+Workflow Overview:-
 Protein (PDB) --> Remove Water & Heteroatoms --> Add Hydrogens & Charges --> receptor.pdbqt
 Ligand (SDF/MOL2) --> Add Hydrogens & Torsions --> ligand.pdbqt
          |
@@ -119,7 +120,7 @@ bashvina --receptor receptor.pdbqt \
 This generates output.pdbqt (all docked poses) and log.txt (binding energies).
 
 
-Step 7 — Analyze Results
+Step 7 — Analyze Results:-
 Open log.txt — it shows binding affinities for each pose:
 -----+------------+----------+----------
 mode | affinity   | dist from best mode
@@ -132,13 +133,13 @@ Best pose = Mode 1 (lowest binding affinity)
 Key values:
 ParameterMeaningAffinity (kcal/mol)Lower (more negative) = stronger bindingRMSD l.b.Lower bound RMSD from best modeRMSD u.b.Upper bound RMSD from best mode
 
-Step 8 — Extract Best Pose
+Step 8 — Extract Best Pose:-
 Split the output file to get individual poses:
 bashvina_split --input output.pdbqt
 This creates output_ligand_01.pdbqt, output_ligand_02.pdbqt, etc.
 Mode 1 (_01) is your best docking pose.
 
-Step 9 — Visualize in PyMOL
+Step 9 — Visualize in PyMOL:-
 bashpymol receptor.pdb output_ligand_01.pdbqt
 In PyMOL:
 
@@ -157,13 +158,13 @@ LigandBinding Affinity (kcal/mol)RMSD l.b.RMSD u.b.Compound A-9.20.0000.000Compo
 Lower binding affinity = stronger predicted binding interaction
 
 
-AutoDock 4 vs AutoDock Vina — Quick Comparison
+AutoDock 4 vs AutoDock Vina — Quick Comparison:-
 FeatureAutoDock 4AutoDock VinaSpeedSlowerUp to 100x fasterGrid mapsRequired (AutoGrid)Not requiredConfigurationComplex (.gpf, .dpf)Simple (config.txt)AlgorithmLGAIterated local searchAccuracyGoodGenerally betterBest forDetailed studiesScreening & beginners
 
 Common Errors & Fixes
 ErrorFix"Could not load receptor"Check .pdbqt format — ensure charges were added"Ligand outside the box"Re-center grid box or increase box sizeAll modes same energyIncrease exhaustiveness"No output generated"Check config.txt for typos in file namesPyMOL won't open .pdbqtConvert to .pdb using Open Babel first
 
-Tips for Better Results
+Tips for Better Results:-
 
 Use exhaustiveness = 16 or 32 for research-grade results (slower but more thorough)
 Always remove water and heteroatoms from the receptor before docking
@@ -171,7 +172,7 @@ Validate your docking by re-docking the co-crystallized ligand and checking RMSD
 Cross-check results with KEGG and STRING for pathway relevance
 
 
-References
+References:-
 
 Trott & Olson (2010). AutoDock Vina. J Comput Chem, 31(2), 455–461
 AutoDock Vina Manual
@@ -179,7 +180,7 @@ MGLTools Documentation
 Open Babel Documentation
 
 
-Author
+Author:-
 Mulpuri Sravya
 B.Tech Bioinformatics, VFSTR
 LinkedIn · ORCID
